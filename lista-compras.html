@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head><meta http-equiv="cache-control" content="no-cache"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="-1"><style type="text/css"></style>
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Lista de Compras</title>
+</head>
+<body>
+<input placeholder="produto" type="text" id="produto"> <br> <br>
+<input placeholder="quantidade" type="number" id="quantidade"><br> <br>
+<input placeholder="valor" type="number" id="orcamento"><br> <br>  
+ 
+  <p id="res"> </p>
+  
+  <input type="button" value="adicionar" onclick="adicionar()">
+  <input type="button" value="somar" onclick="somar()">
+  
+
+<script>var produto = document.getElementById("produto");
+var quantidade = document.getElementById("quantidade");
+
+var orcamento = document.getElementById("orcamento");
+var res = document.getElementById("res")
+var lista = {};
+var valoresOrc = []
+var numValores = ''
+var total =0;
+
+function adicionar () {
+  
+   var p = document.createElement("p");
+     Object.assign(lista, {[produto.value]:{quantidade:quantidade.value, valor: orcamento.value}})
+     valoresOrc.push(quantidade.value *orcamento.value)
+       numValores = valoresOrc.map(Number) 
+
+p.innerHTML = `Item: ${produto.value} <br/> Valor:${orcamento.value} <br/> Quantidade Pedida: ${quantidade.value} <br/> Orçamento Necessário: ${quantidade.value * orcamento.value}` ;
+  
+document.querySelector("body").appendChild(p);
+
+  console.log(numValores)
+  quantidade.value = '';
+  orcamento.value = '';
+  produto.value = '';
+  
+}
+
+function somar() {
+  
+for(var i in numValores) { total += numValores[i]; }
+
+  console.log(total)
+
+
+   res.innerHTML = `Itens: ${Object.keys(lista)} <br/>
+Quantidade: ${Object.keys(lista).length} <br/>
+Orçamento Necessário: ${total}
+`
+ 
+  
+  
+}</script></body>
